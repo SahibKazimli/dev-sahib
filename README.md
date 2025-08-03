@@ -1,4 +1,4 @@
-# OWN YOUR FLOW - C++ AI Agent
+# OWN YOUR FLOW: C++ AI Agent
 Created: 2025-08-03
 
 ```bash
@@ -22,7 +22,7 @@ Created: 2025-08-03
       .:+=*#+++**#@####%%**:...-:......:-..     .::.      .::......:-....**%%####@#***++#*++:.      
     .-+**+**%*#%@@@@%##%##=--::-*@@@@@#+==-.......... ...:==+#@@@@@*-::--=*#%##%@@@@%#*%*****+=.    
     +*****+=*%@@%#%##%+=++*++#@@@@@@@@@@@@%+-:::-==-:::-+#@@@@@@@@@@@@#=**=+=+###%##@@%*=+*****+    
-    .:=*=:....=**++##*#@@#=-=@-OWNYOURFLOW-%%##+=--=+*#%%@-OWNYOURFLOW-@=+#@@#**#++**=.....=*=:.    
+    .:=*=:....=**++##*#@@#=-=-OWNYOURFLOW-@%##+=--=+*#%%@-OWNYOURFLOW-@=+#@@#**#++**=.....=*=:.    
            .-*++++=#%%#*@%+=:*@@@@@@%@@@@@@%#==.::-:.-=#%@@@@@@%@@@@@@*.==%@*#%%#=++++*-.           
            .=++**+++#%%%%+..:-*@@@@%%%%%@@%**:.:*%%*:.:*+%@@%%%%%@@@@*-:..=%#%%%+++**++=..          
            .-+%#****###+.....-**+======-:-:::.-%@@@@%-.:::-:-======+**-.....=####***#%+-.           
@@ -41,8 +41,7 @@ Created: 2025-08-03
                                  .:+=:..:..=.          .=..:..:=+:.                                 
                                     .=%*-...-..       .-...-*%=.                                    
                                      ...:---+..........+---:...                                     
-                                         ..+-::=#%%#=-:-+..                                         
-                   
+                                         ..+-::=#%%#=-:-+..                     
 ```
 
 There's recently been growing concerns of making API calls to model-providers considering data security, ownership, downtime and cost.
@@ -50,16 +49,15 @@ There's recently been growing concerns of making API calls to model-providers co
 At the same time we've seen growth of agentic AI solutions in the tech market. 
 The study “Small Language Models are the Future of Agentic AI”, Peter Belcak et al. (NVIDIA Research & Georgia Tech) advocates clearly for the use of smaller LLMs in agentic tasks.
 This is a perfect setup for an agentic REST solution of an agent that I can deploy on my own wherever required in the future to perform RAG, web-search, sentiment analysis and more.
-Link: https://arxiv.org/abs/2506.02153
+  Link: https://arxiv.org/abs/2506.02153
 
 Llama.cpp is perfect for this and to stick with the .cpp part I've chosen the C++ library Crow to deploy this project as a REST API.
-Link: 
+  Link: https://github.com/CrowCpp/Crow
 
 The CoT currently implemented is very rudimentary composed off 2 steps. Reason and generate (ReGe, if you will). 
 With time I'll develop a more complex logical framework for the LLM to follow and execute tasks probably using instinct.cpp dubbed as "langchain.cpp" to manage tool-calling and tasks.
 NOTE: This would require pivoting to llama-server as opposed to llama-run to execute prompts, since instinct.cpp does not support llama-run.
-Link: 
-https://github.com/RobinQu/instinct.cpp
+  Link: https://github.com/RobinQu/instinct.cpp
 
 Everything is currently implemented without Langchain, but instead done manually through program-flow. 
 
