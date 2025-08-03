@@ -19,7 +19,7 @@
 int main() {
     crow::SimpleApp app;
 
-    CROW_ROUTE(app, "/data/").methods("POST"_method)
+    CROW_ROUTE(app, "/query/").methods("POST"_method)
     ([](const crow::request& req){
         auto body = crow::json::load(req.body);
         if (!body)
@@ -52,7 +52,7 @@ int main() {
         // Get final response from CoT step 2
         std::string response = cot.stepTwo(filled_step2);
 
-        // Making sure we have a line break
+        // Making sure we have a line
         response = response + "\n";
 
         std::cout << "RESPONSE: " << response << std::endl;
