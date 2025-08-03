@@ -1,0 +1,12 @@
+name: step_2_logic
+version: 2.0
+description: |
+  A prompt designed to guide the AI in providing the final response in a 2 step thinking process.
+prompt: |
+  Answer this question based on the reasoning provided:
+  
+  Question: {}
+  
+  Reasoning: {}
+  
+  Answer:

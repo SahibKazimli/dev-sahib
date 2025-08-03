@@ -1,0 +1,10 @@
+name: step_1_logic
+version: 1.0
+description: |
+  A prompt designed to guide the AI in providing logical and structured responses for the first step of a thinking process.
+prompt: |
+  Analyze this question and provide a brief reasoning step (2-3 sentences max):
+  
+  Question: {}
+  
+  Reasoning:
