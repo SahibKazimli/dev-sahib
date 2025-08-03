@@ -1,4 +1,4 @@
-# OWN YOUR MODELS - C++ REST AI Agent
+# OWN YOUR FLOW - C++ AI Agent
 Created: 2025-08-03
 
 There's recently been growing concerns of making API calls to model-providers considering data security, ownership, downtime and cost.
