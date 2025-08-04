@@ -1,0 +1,8 @@
+{
+    "user_id": "str",
+    "timestamp": "str",
+    "query": "str",
+    "query_embedding": "List[float]",
+    "response": "str",
+    "response_embedding": "List[float]"
+}
