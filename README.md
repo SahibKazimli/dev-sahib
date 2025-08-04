@@ -61,6 +61,8 @@ NOTE: This would require pivoting to llama-server as opposed to llama-run to exe
 
 Everything is currently implemented without Langchain, but instead done manually through program-flow. 
 
+Currently using Qwen_Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf as the Master LLM
+
 ### Future:
 As afformentioned this project will seek to build agentic capabilities manually through C++ program flow and langchain.cpp.
 The goal is to minimize latency and cost of compute by writing in C++ and forcing the models to respond with low token counts.
@@ -115,5 +117,5 @@ wget https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/
 ## Query (linux):
 
 ```bash
-curl -X POST http://localhost:8000/data/      -H "Content-Type: application/json"      -d '{"query": "YOUR QUERY HERE"}'
+curl -X POST http://localhost:8000/query/      -H "Content-Type: application/json"      -d '{"query": "YOUR QUERY HERE"}'
 ```
