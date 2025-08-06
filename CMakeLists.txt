@@ -9,7 +9,6 @@ find_package(fmt REQUIRED)
 
 # Add llama.cpp subdirectory
 add_subdirectory(libs/llama.cpp)
-add_subdirectory(libs/redis++)
 
 # Add Crow (header-only library)
 include_directories(include)
@@ -37,7 +36,6 @@ target_link_libraries(server
     llama 
     pthread
     redis++
-    redis++  # This should work with your installed libredis++.so
     hiredis
     curl
 ) 
