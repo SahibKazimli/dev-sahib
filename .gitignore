@@ -5,4 +5,5 @@ server
 .vscode/
 .idea/
 .env
+cmake-build-debug
 
