@@ -3,6 +3,9 @@ project(cpp_server)
 
 set(CMAKE_CXX_STANDARD 17)
 
+# Point to Homebrew installation
+set(CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH} /opt/homebrew/opt/fmt")
+
 # Find required packages
 find_package(yaml-cpp REQUIRED)
 find_package(fmt REQUIRED)
@@ -13,6 +16,8 @@ add_subdirectory(libs/llama.cpp)
 
 # Add Crow (header-only library)
 include_directories(include)
+
+
 
 # Add executable
 add_executable(server 

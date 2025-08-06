@@ -13,4 +13,4 @@ public:
 
     // Fills prompt using query + first reasoning step (for step 2)
     std::string fill_step2(const std::string& prompt_template, const std::string& thought) const;
-};
+};x

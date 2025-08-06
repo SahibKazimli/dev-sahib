@@ -1,0 +1,22 @@
+/Users/sahibkazimli/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles" -S /Users/sahibkazimli/CLionProjects/dev-sahib -B /Users/sahibkazimli/CLionProjects/dev-sahib/cmake-build-debug
+CMake Error at /Users/sahibkazimli/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake:76 (find_package):
+  By not providing "Findhiredis.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "hiredis", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "hiredis" with any
+  of the following names:
+
+    hiredisConfig.cmake
+    hiredis-config.cmake
+
+  Add the installation prefix of "hiredis" to CMAKE_PREFIX_PATH or set
+  "hiredis_DIR" to a directory containing one of the above files.  If
+  "hiredis" provides a separate development package or SDK, be sure it has
+  been installed.
+Call Stack (most recent call first):
+  /usr/local/share/cmake/redis++/redis++-config.cmake:31 (find_dependency)
+  CMakeLists.txt:12 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
