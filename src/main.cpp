@@ -12,9 +12,14 @@
 
 // HTTP
 #include "include/crow_all.h"
+
+// Logic & utils
 #include "parser.h"
 #include "filler.h"
 #include "cot.h"
+
+// DB
+#include "db/db_manager.h"
 
 int main() {
     crow::SimpleApp app;
