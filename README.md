@@ -71,28 +71,27 @@ The goal is to minimize latency and cost of compute by writing in C++ and forcin
 
 ```bash
 # System dependencies
-sudo apt-get install libhiredis-dev libcurl4-openssl-dev libgtest-dev
+sudo apt-get install libhiredis-dev libredis++-dev libcurl4-openssl-dev libgtest-dev
 sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev
 ```
 
 ## Setup
 
 ```bash
-# 1. Build redis-plus-plus (required before main build)
-cd libs/redis-plus-plus
-mkdir -p build && cd build
-cmake ..
-make -j$(nproc)
-cd ../../
-
-#1.1 Alternatively just build it globally - easier this way probably
-
-# 2. Setup Redis database
+# 1. Setup Redis database
 cd src/db
 ./setup.sh
 docker compose up -d
 
-# 3. Build server
+# 2. Build server
+make
+```
+
+Or with Cmake:
+```bash
+# 1. Setup Redis database
+mkdir build && cd build
+cmake ..
 make
 ```
 

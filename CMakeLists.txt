@@ -7,22 +7,6 @@ set(CMAKE_CXX_STANDARD 17)
 find_package(yaml-cpp REQUIRED)
 find_package(fmt REQUIRED)
 
-# Try to find redis++ system-wide first, fallback to local build
-find_package(redis++ QUIET)
-if(NOT redis++_FOUND)
-    # Check if local build exists
-    if(EXISTS "${CMAKE_SOURCE_DIR}/libs/redis-plus-plus/build/libredis++.a")
-        set(REDIS_PLUS_PLUS_LIB "${CMAKE_SOURCE_DIR}/libs/redis-plus-plus/build/libredis++.a")
-        set(REDIS_PLUS_PLUS_INCLUDE "${CMAKE_SOURCE_DIR}/libs/redis-plus-plus/src")
-        message(STATUS "Using local redis-plus-plus build")
-    else()
-        message(FATAL_ERROR "redis++ not found. Please install it system-wide or build locally in libs/redis-plus-plus/")
-    endif()
-else()
-    set(REDIS_PLUS_PLUS_LIB redis++::redis++static)
-    message(STATUS "Using system redis++")
-endif()
-
 # Add llama.cpp subdirectory
 add_subdirectory(libs/llama.cpp)
 
@@ -42,8 +26,6 @@ target_include_directories(server PRIVATE
     . 
     src 
     libs/llama.cpp
-    ${REDIS_PLUS_PLUS_INCLUDE}
-    libs/hiredis
 )
 
 # Link libraries
@@ -52,7 +34,7 @@ target_link_libraries(server
     fmt::fmt 
     llama 
     pthread
-    ${REDIS_PLUS_PLUS_LIB}
+    redis++  # This should work with your installed libredis++.so
     hiredis
     curl
 ) 

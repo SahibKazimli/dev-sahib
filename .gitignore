@@ -16,3 +16,6 @@ src/db/.env
 # Generated files
 src/db/simple_test
 src/db/test_db
+
+# Cmake
+cmake-build-debug/
