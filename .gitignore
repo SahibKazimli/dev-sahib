@@ -4,6 +4,18 @@ server
 .DS_Store
 .vscode/
 .idea/
-.env
-cmake-build-debug
 
+# Environment files
+.env
+*.env
+
+# Redis configuration with passwords
+src/db/redis.conf
+src/db/.env
+
+# Generated files
+src/db/simple_test
+src/db/test_db
+
+# Cmake
+cmake-build-debug/

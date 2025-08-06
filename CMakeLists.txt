@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD 17)
 # Find required packages
 find_package(yaml-cpp REQUIRED)
 find_package(fmt REQUIRED)
-find_package(redis++ REQUIRED)
 
 # Add llama.cpp subdirectory
 add_subdirectory(libs/llama.cpp)
@@ -38,5 +37,7 @@ target_link_libraries(server
     llama 
     pthread
     redis++
+    redis++  # This should work with your installed libredis++.so
+    hiredis
     curl
 ) 

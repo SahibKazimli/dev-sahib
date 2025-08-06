@@ -1,0 +1,18 @@
+# Security settings
+bind 127.0.0.1
+protected-mode yes
+requirepass YOUR_STRONG_PASSWORD_HERE
+
+# Disable dangerous commands
+rename-command FLUSHDB ""
+rename-command FLUSHALL ""
+rename-command KEYS ""
+rename-command CONFIG ""
+
+# Network settings
+tcp-keepalive 300
+timeout 0
+
+# Memory settings
+maxmemory 256mb
+maxmemory-policy allkeys-lru 
