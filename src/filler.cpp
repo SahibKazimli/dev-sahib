@@ -12,3 +12,8 @@ std::string Filler::fill_step2(const std::string& prompt_template, const std::st
     // Replace first with query, second with thought
     return fmt::format(prompt_template, query, thought);
 }
+
+// Prototype for the third agentic loop
+std::string Filler::fill_step3(const std::string& agent_prompt_template) const {
+    return fmt::format(agent_prompt_template, query);
+}

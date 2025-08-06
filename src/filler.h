@@ -13,4 +13,7 @@ public:
 
     // Fills prompt using query + first reasoning step (for step 2)
     std::string fill_step2(const std::string& prompt_template, const std::string& thought) const;
+
+    // Fills the step 2 prompt with the user query and initial reasoning to initiate the agent
+    std::string Filler::fill_step3(const std::string& agent_prompt_template) const;
 };

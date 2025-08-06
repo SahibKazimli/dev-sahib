@@ -10,6 +10,7 @@ find_package(redis++ REQUIRED)
 
 # Add llama.cpp subdirectory
 add_subdirectory(libs/llama.cpp)
+add_subdirectory(libs/redis++)
 
 # Add Crow (header-only library)
 include_directories(include)
@@ -20,6 +21,7 @@ add_executable(server
     src/cot.cpp
     src/parser.cpp
     src/filler.cpp
+        src/cot.cpp
 )
 
 # Include directories
@@ -35,6 +37,6 @@ target_link_libraries(server
     fmt::fmt 
     llama 
     pthread
-    redis++::redis++static
+    redis++
     curl
 ) 

@@ -1,0 +1,104 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"libs/llama.cpp/ggml/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 285,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 286,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 374,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"bin/libggml.dylib"
+			],
+			"targetId" : "ggml::@9ef2682d9bf4a60f6792",
+			"targetIndex" : 0,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "include",
+			"paths" : 
+			[
+				"libs/llama.cpp/ggml/include/ggml.h",
+				"libs/llama.cpp/ggml/include/ggml-cpu.h",
+				"libs/llama.cpp/ggml/include/ggml-alloc.h",
+				"libs/llama.cpp/ggml/include/ggml-backend.h",
+				"libs/llama.cpp/ggml/include/ggml-blas.h",
+				"libs/llama.cpp/ggml/include/ggml-cann.h",
+				"libs/llama.cpp/ggml/include/ggml-cpp.h",
+				"libs/llama.cpp/ggml/include/ggml-cuda.h",
+				"libs/llama.cpp/ggml/include/ggml-opt.h",
+				"libs/llama.cpp/ggml/include/ggml-metal.h",
+				"libs/llama.cpp/ggml/include/ggml-rpc.h",
+				"libs/llama.cpp/ggml/include/ggml-sycl.h",
+				"libs/llama.cpp/ggml/include/ggml-vulkan.h",
+				"libs/llama.cpp/ggml/include/ggml-webgpu.h",
+				"libs/llama.cpp/ggml/include/gguf.h"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"bin/libggml-base.dylib"
+			],
+			"targetId" : "ggml-base::@9ef2682d9bf4a60f6792",
+			"targetIndex" : 1,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "lib/cmake/ggml",
+			"paths" : 
+			[
+				"cmake-build-debug/libs/llama.cpp/ggml/ggml-config.cmake",
+				"cmake-build-debug/libs/llama.cpp/ggml/ggml-version.cmake"
+			],
+			"type" : "file"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "libs/llama.cpp/ggml",
+		"source" : "libs/llama.cpp/ggml"
+	}
+}
