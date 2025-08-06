@@ -1,0 +1,7 @@
+[submodule "libs/instinct.cpp"]
+	path = libs/instinct.cpp
+	url = https://github.com/RobinQu/instinct.cpp
+
+[submodule "libs/llama.cpp"]
+	path = libs/llama.cpp
+	url = https://github.com/ggml-org/llama.cpp

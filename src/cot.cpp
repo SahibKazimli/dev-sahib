@@ -18,7 +18,7 @@ CoT::CoT(const std::string& model_path, double temp)
     : model_path(model_path), temperature(temp) {}
 
 std::string CoT::getResponse(const std::string& prompt) {
-    std::string command = "llama.cpp/build/bin/llama-run " 
+    std::string command = "libs/llama.cpp/build/bin/llama-run " 
         + std::string("--temp ") + std::to_string(temperature) + " "
         + model_path + " \"" + prompt + "\""; 
 

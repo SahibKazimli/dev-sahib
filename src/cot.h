@@ -9,7 +9,7 @@ private:
     std::string getResponse(const std::string& prompt);
 
 public:
-    CoT(const std::string& model_path = "./llama.cpp/models/Qwen/Qwen_Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf", 
+    CoT(const std::string& model_path = "./libs//llama.cpp/models/tinyllama-1.1b-chat-v1.0.Q4_0.gguf", 
         double temp = 0.9);
     
     std::string stepOne(const std::string& prompt);

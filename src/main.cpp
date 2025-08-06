@@ -25,6 +25,8 @@ int main() {
         if (!body)
             return crow::response(400, "Invalid JSON");
 
+        std::cout << "package received: " << body["query"] << std::endl;
+
         std::string query = body["query"].s();
         
         // Parse both prompts

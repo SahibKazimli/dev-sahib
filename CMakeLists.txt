@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(yaml-cpp REQUIRED)
 find_package(fmt REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system json)
 
 add_executable(server 
     src/main.cpp
@@ -14,4 +15,4 @@ add_executable(server
 )
 
 target_include_directories(server PRIVATE . src)
-target_link_libraries(server yaml-cpp::yaml-cpp fmt::fmt pthread) 
+target_link_libraries(server yaml-cpp::yaml-cpp fmt::fmt Boost::system Boost::json pthread) 
