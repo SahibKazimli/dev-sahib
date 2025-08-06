@@ -67,55 +67,99 @@ Currently using Qwen_Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf as the Master LLM
 As afformentioned this project will seek to build agentic capabilities manually through C++ program flow and langchain.cpp.
 The goal is to minimize latency and cost of compute by writing in C++ and forcing the models to respond with low token counts.
 
-## Build
-
-```bash
-mkdir build && cd build
-cmake ..
-make
-```
-
-## Run
-
-```bash
-./server
-```
-
-## API
-
-POST `http://localhost:8000/data/`
-
-```json
-{
-  "query": "your question"
-}
-```
-
 ## Dependencies
 
 - yaml-cpp
 - fmt
 - llama.cpp (for llama-run binary)
+- instinct.cpp (for agentic capabilities)
 
-## Llama.cpp Setup
+## Sys dependencies
 
 ```bash
-# Clone llama.cpp
-git clone https://github.com/ggerganov/llama.cpp.git
+sudo apt-get install libgtest-dev ### For instinct.cpp.
 
-# Build with llama-run target
-cd llama.cpp
-mkdir build && cd build
-cmake .. -DLLAMA_BUILD_SERVER=OFF -DLLAMA_BUILD_EXAMPLES=ON
-make llama-run
+sudo apt-get update
+sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev ### Also for fucking cpp why is it using a diff compiler.
+```
+## Setup
 
-# Download a model (example with TinyLlama, using Qwan in new version, you're welcome to experiment further)
-mkdir models
-wget https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q4_0.gguf -O models/tinyllama-1.1b-chat-v1.0.Q4_0.gguf
-``` 
+```bash
+#!/bin/bash
+
+# Build llama.cpp with both server and examples
+cd libs/llama.cpp
+mkdir -p build && cd build
+cmake .. -DLLAMA_BUILD_SERVER=ON -DLLAMA_BUILD_EXAMPLES=ON
+make -j$(nproc)
+cd ../../
+
+# Build your server
+mkdir -p build && cd build
+cmake ..
+make
+```
+
+Make it executable: `chmod +x scripts/setup.sh`
 
 ## Query (linux):
 
 ```bash
 curl -X POST http://localhost:8000/query/      -H "Content-Type: application/json"      -d '{"query": "YOUR QUERY HERE"}'
 ```
+
+## **CMakeLists.txt - Complete Setup**
+
+```cmake
+cmake_minimum_required(VERSION 3.16)
+project(cpp_server)
+
+set(CMAKE_CXX_STANDARD 17)
+
+find_package(yaml-cpp REQUIRED)
+find_package(fmt REQUIRED)
+
+# Add both subdirectories
+add_subdirectory(libs/llama.cpp)
+add_subdirectory(libs/instinct.cpp)
+
+# Add Crow (header-only library)
+include_directories(include)
+
+add_executable(server 
+    src/main.cpp
+    src/cot.cpp
+    src/parser.cpp
+    src/filler.cpp
+)
+
+target_include_directories(server PRIVATE . src libs/instinct.cpp/include libs/llama.cpp)
+target_link_libraries(server yaml-cpp::yaml-cpp fmt::fmt instinct_cpp llama pthread)
+```
+
+## **Build Both Components**
+
+```bash
+<code_block_to_apply_changes_from>
+```
+
+## **Usage Strategy**
+
+**Current (llama-run):**
+- Direct process execution via `popen()`
+- Simple, synchronous
+- Good for basic CoT
+
+**Future (llama-server + instinct.cpp):**
+- HTTP API calls to llama-server
+- Async, multi-client
+- Advanced agentic capabilities
+
+## **Benefits**
+
+1. **Flexibility**: Can switch between approaches
+2. **Gradual migration**: Keep current CoT working while adding agentic features
+3. **Performance**: llama-server for complex workflows, llama-run for simple tasks
+4. **Future-proof**: Ready for instinct.cpp integration
+
+This setup gives you the best of both worlds!

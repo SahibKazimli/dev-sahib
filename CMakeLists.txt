@@ -3,12 +3,14 @@ project(cpp_server)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# Find dependencies
 find_package(yaml-cpp REQUIRED)
 find_package(fmt REQUIRED)
 
-# Add instinct.cpp subdirectory
-add_subdirectory(lib/instinct.cpp)
+# Add both subdirectories
+add_subdirectory(libs/llama.cpp)
+
+# Add Crow (header-only library)
+include_directories(include)
 
 add_executable(server 
     src/main.cpp
@@ -17,5 +19,5 @@ add_executable(server
     src/filler.cpp
 )
 
-target_include_directories(server PRIVATE . src lib/instinct.cpp/include)
-target_link_libraries(server yaml-cpp::yaml-cpp fmt::fmt instinct_cpp pthread) 
+target_include_directories(server PRIVATE . src libs/llama.cpp)
+target_link_libraries(server yaml-cpp::yaml-cpp fmt::fmt instinct_cpp llama pthread) 
