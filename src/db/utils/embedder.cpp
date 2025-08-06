@@ -15,5 +15,7 @@ curl -X POST "https://api.mistral.ai/v1/embeddings" \
 
 public:
     // Generate embedding using Mistral API
-    std::vector<float> generateEmbedding(const std::string& text, const std::string& api_key);
+    std::vector<double> generateEmbedding(const std::string& text, const std::string& api_key);
+        // Assuming float is 32 but since JSON standard is float64 we're reading it as a double which should be fine.
+        
 };
