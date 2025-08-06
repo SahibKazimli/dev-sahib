@@ -69,123 +69,57 @@ The goal is to minimize latency and cost of compute by writing in C++ and forcin
 
 ## Dependencies
 
-- yaml-cpp
-- fmt
-- llama.cpp (for llama-run binary)
-- instinct.cpp (for agentic capabilities)
-- hiredis (for Redis vector database)
-- libcurl (for API calls)
-
-## Sys dependencies
-
 ```bash
-sudo apt-get install libgtest-dev ### For instinct.cpp.
-
-sudo apt-get update
-sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev ### Also for fucking cpp why is it using a diff compiler.
-
-sudo apt-get install libhiredis-dev libcurl4-openssl-dev ### For Redis and API calls.
-
-### using redis++ as redis client for our project.
-### Bruh just install ts globally so git clone then sudo make.
+# System dependencies
+sudo apt-get install libhiredis-dev libcurl4-openssl-dev libgtest-dev
+sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev
 ```
 
 ## Setup
 
 ```bash
-#!/bin/bash
-
-# Build llama.cpp with both server and examples
-cd libs/llama.cpp
+# 1. Build redis-plus-plus (required before main build)
+cd libs/redis-plus-plus
 mkdir -p build && cd build
-cmake .. -DLLAMA_BUILD_SERVER=ON -DLLAMA_BUILD_EXAMPLES=ON
+cmake ..
 make -j$(nproc)
 cd ../../
 
-# Build your server
-make
+#1.1 Alternatively just build it globally - easier this way probably
 
-# Setup Redis database with vector search
-make setup-db
-```
+# 2. Setup Redis database
+cd src/db
+./setup.sh
+docker compose up -d
 
-Make it executable: `chmod +x scripts/setup.sh`
-
-## Query (linux):
-
-```bash
-curl -X POST http://localhost:8000/query/      -H "Content-Type: application/json"      -d '{"query": "YOUR QUERY HERE"}'
-```
-
-## **CMakeLists.txt - Complete Setup**
-
-```cmake
-cmake_minimum_required(VERSION 3.16)
-project(cpp_server)
-
-set(CMAKE_CXX_STANDARD 17)
-
-find_package(yaml-cpp REQUIRED)
-find_package(fmt REQUIRED)
-
-# Add both subdirectories
-add_subdirectory(libs/llama.cpp)
-add_subdirectory(libs/instinct.cpp)
-
-# Add Crow (header-only library)
-include_directories(include)
-
-add_executable(server 
-    src/main.cpp
-    src/cot.cpp
-    src/parser.cpp
-    src/filler.cpp
-)
-
-target_include_directories(server PRIVATE . src libs/instinct.cpp/include libs/llama.cpp)
-target_link_libraries(server yaml-cpp::yaml-cpp fmt::fmt instinct_cpp llama pthread)
-```
-
-## **Build Both Components**
-
-```bash
-<code_block_to_apply_changes_from>
-```
-
-## **Usage Strategy**
-
-**Current (llama-run):**
-- Direct process execution via `popen()`
-- Simple, synchronous
-- Good for basic CoT
-
-**Future (llama-server + instinct.cpp):**
-- HTTP API calls to llama-server
-- Async, multi-client
-- Advanced agentic capabilities
-
-## **Database Setup**
-
-**Redis Vector Database:**
-- Stores documents with query/response embeddings
-- Vector similarity search for RAG
-- Automatic indexing at startup
-- Structure: `{user_id, timestamp, query, query_embedding, response, response_embedding}`
-
-```bash
-# Start Redis with vector search
-make setup-db
-
-# Build with hiredis support
+# 3. Build server
 make
 ```
 
-## **Benefits**
+## Usage
 
-1. **Flexibility**: Can switch between approaches
-2. **Gradual migration**: Keep current CoT working while adding agentic features
-3. **Performance**: llama-server for complex workflows, llama-run for simple tasks
-4. **Future-proof**: Ready for instinct.cpp integration
-5. **RAG-ready**: Vector database for document retrieval and similarity search
+```bash
+# Start the server
+./server
 
-This setup gives you the best of both worlds!
+# Test Redis connection
+cd src/db
+export REDIS_PASSWORD=c37iCfFDrjL2GqpldarrQ6FHB
+export REDIS_HOST=127.0.0.1
+export REDIS_PORT=6379
+LD_LIBRARY_PATH=../../libs/redis-plus-plus/build:$LD_LIBRARY_PATH ./simple_test
+
+# Query the API
+curl -X POST http://localhost:8000/query/ \
+  -H "Content-Type: application/json" \
+  -d '{"query": "Your question here"}'
+```
+
+## Features
+
+- ✅ **Redis vector database** with similarity search
+- ✅ **Document storage** and retrieval
+- ✅ **Secure authentication** 
+- ✅ **Environment-based configuration**
+- 🔄 **RAG capabilities** (in development)
+- 🔄 **LLM integration** (in development)
