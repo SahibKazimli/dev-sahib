@@ -1,4 +1,7 @@
 // for embeddings - using mistral api for now but might want to switch to local model
+#include <iostream>
+#include <vector>
+#include <string>
 
 class embeddingString {
 private:
