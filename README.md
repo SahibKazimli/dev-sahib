@@ -85,6 +85,9 @@ sudo apt-get update
 sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev ### Also for fucking cpp why is it using a diff compiler.
 
 sudo apt-get install libhiredis-dev libcurl4-openssl-dev ### For Redis and API calls.
+
+### using redis++ as redis client for our project.
+### Bruh just install ts globally so git clone then sudo make.
 ```
 
 ## Setup

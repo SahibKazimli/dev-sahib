@@ -1,6 +1,6 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra $(shell pkg-config --cflags hiredis)
-LIBS = $(shell pkg-config --libs hiredis) -lcurl -lyaml-cpp -lfmt -lpthread
+CXXFLAGS = -std=c++17 -Wall -Wextra
+LIBS = -lredis++ -lcurl -lyaml-cpp -lfmt -lpthread
 INCLUDES = -I. -I./src
 
 # Directories
