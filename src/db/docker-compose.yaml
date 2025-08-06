@@ -1,11 +1,14 @@
-version: "3.9"
+version: '3.8'
+
 services:
   redis:
     image: redis/redis-stack:latest
-    container_name: redis-stack
+    container_name: redis-vector
     ports:
       - "6379:6379"
-      - "8001:8001"  # Redis Insight
     volumes:
-      - ./redis-init.sh:/usr/local/bin/redis-init.sh:ro
-    entrypoint: ["/usr/local/bin/redis-init.sh"]
+      - redis_data:/data
+      - ./redis-init:/docker-entrypoint-initdb.d
+
+volumes:
+  redis_data:

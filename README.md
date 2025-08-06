@@ -7,7 +7,7 @@ Created: 2025-08-03
            .-:..         .::+######=          ...::....        .=######+::.         ..:-            
               .:....  ...:-#######+.     .................     ..+#######-:.........:.              
               .=*+++-:-=**###*##*:......::--:..........:--::.... .:+##*###**+-:-+++*=.              
-              .:+++====*#%%##%*:..:::......:::::-::-::::.......:::..:*%##%%%*+===+++:.              
+              .:+++===*#%%##%*:..:::......:::::-::-::::.......:::..:*%##%%%*+===+++:.              
                .:+=+*===+*%%@%##=:..........  ..:..::..........  .:=##%@%%*+===*+++:....            
                 .-+++###+=+*=++:.. ....         ....         ...   .-++=*+=+###+++-.                
               .:.+#*+*##%*:++=:....:-...        ....        ...-:....:+++:*%##*+*#*.:               
@@ -47,7 +47,7 @@ Created: 2025-08-03
 There's recently been growing concerns of making API calls to model-providers considering data security, ownership, downtime and cost.
 
 At the same time we've seen growth of agentic AI solutions in the tech market. 
-The study “Small Language Models are the Future of Agentic AI”, Peter Belcak et al. (NVIDIA Research & Georgia Tech) advocates clearly for the use of smaller LLMs in agentic tasks.
+The study "Small Language Models are the Future of Agentic AI", Peter Belcak et al. (NVIDIA Research & Georgia Tech) advocates clearly for the use of smaller LLMs in agentic tasks.
 This is a perfect setup for an agentic REST solution of an agent that I can deploy on my own wherever required in the future to perform RAG, web-search, sentiment analysis and more.
   Link: https://arxiv.org/abs/2506.02153
 
@@ -73,6 +73,8 @@ The goal is to minimize latency and cost of compute by writing in C++ and forcin
 - fmt
 - llama.cpp (for llama-run binary)
 - instinct.cpp (for agentic capabilities)
+- hiredis (for Redis vector database)
+- libcurl (for API calls)
 
 ## Sys dependencies
 
@@ -81,7 +83,10 @@ sudo apt-get install libgtest-dev ### For instinct.cpp.
 
 sudo apt-get update
 sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev ### Also for fucking cpp why is it using a diff compiler.
+
+sudo apt-get install libhiredis-dev libcurl4-openssl-dev ### For Redis and API calls.
 ```
+
 ## Setup
 
 ```bash
@@ -95,9 +100,10 @@ make -j$(nproc)
 cd ../../
 
 # Build your server
-mkdir -p build && cd build
-cmake ..
 make
+
+# Setup Redis database with vector search
+make setup-db
 ```
 
 Make it executable: `chmod +x scripts/setup.sh`
@@ -155,11 +161,28 @@ target_link_libraries(server yaml-cpp::yaml-cpp fmt::fmt instinct_cpp llama pthr
 - Async, multi-client
 - Advanced agentic capabilities
 
+## **Database Setup**
+
+**Redis Vector Database:**
+- Stores documents with query/response embeddings
+- Vector similarity search for RAG
+- Automatic indexing at startup
+- Structure: `{user_id, timestamp, query, query_embedding, response, response_embedding}`
+
+```bash
+# Start Redis with vector search
+make setup-db
+
+# Build with hiredis support
+make
+```
+
 ## **Benefits**
 
 1. **Flexibility**: Can switch between approaches
 2. **Gradual migration**: Keep current CoT working while adding agentic features
 3. **Performance**: llama-server for complex workflows, llama-run for simple tasks
 4. **Future-proof**: Ready for instinct.cpp integration
+5. **RAG-ready**: Vector database for document retrieval and similarity search
 
 This setup gives you the best of both worlds!
